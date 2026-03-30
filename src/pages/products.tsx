@@ -1,0 +1,1 @@
+export const Products = () => {    return (        <div className="min-h-screen bg-gray-50 p-8">            <div className="bg-white rounded-lg shadow p-6">                <h1 className="text-2xl font-bold mb-4">Товары</h1>                <p className="text-gray-600">Страница товаров в разработке...</p>            </div>        </div>    );};
