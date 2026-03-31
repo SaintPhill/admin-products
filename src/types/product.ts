@@ -1,41 +1,1 @@
-export interface Product {
-    id: number;
-    title: string;
-    description: string;
-    price: number;
-    discountPercentage: number;
-    rating: number;
-    stock: number;
-    brand: string;
-    category: string;
-    thumbnail: string;
-    images: string[];
-    sku?: string;
-}
-
-export interface ProductsResponse {
-    products: Product[];
-    total: number;
-    skip: number;
-    limit: number;
-}
-
-export interface AuthResponse {
-    id: number;
-    username: string;
-    email: string;
-    firstName: string;
-    lastName: string;
-    gender: string;
-    image: string;
-    token: string;
-}
-
-export interface NewProduct {
-    title: string;
-    price: number;
-    brand: string;
-    sku?: string;
-    description?: string;
-    category?: string;
-}
+export interface Product {    id: number;    title: string;    description: string;    price: number;    discountPercentage: number;    rating: number;    stock: number;    brand: string;    category: string;    thumbnail: string;    images: string[];    sku?: string;}export interface ProductsResponse {    products: Product[];    total: number;    skip: number;    limit: number;}export interface AuthResponse {    id: number;    username: string;    email: string;    firstName: string;    lastName: string;    gender: string;    image: string;    token: string;}export interface NewProduct {    title: string;    price: number;    brand: string;    sku?: string;    description?: string;    category?: string;}
