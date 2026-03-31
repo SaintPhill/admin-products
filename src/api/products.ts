@@ -1,1 +1,31 @@
-import { api } from '../lib/api';import type { Product, ProductsResponse, NewProduct } from '../types/product';export const productsAPI = {    getProducts: async (limit: number = 100, skip: number = 0): Promise<ProductsResponse> => {        const response = await api.get<ProductsResponse>(`/products?limit=${limit}&skip=${skip}`);        return response.data;    },    searchProducts: async (query: string): Promise<ProductsResponse> => {        const response = await api.get<ProductsResponse>(`/products/search?q=${query}`);        return response.data;    },    getProductById: async (id: number): Promise<Product> => {        const response = await api.get<Product>(`/products/${id}`);        return response.data;    },    addProduct: async (product: NewProduct): Promise<Product> => {        const response = await api.post<Product>('/products/add', product);        return response.data;    },    updateProduct: async (id: number, product: Partial<Product>): Promise<Product> => {        const response = await api.put<Product>(`/products/${id}`, product);        return response.data;    },    deleteProduct: async (id: number): Promise<Product> => {        const response = await api.delete<Product>(`/products/${id}`);        return response.data;    },};
+import { api } from '../lib/api';
+import type { Product, ProductsResponse, NewProduct } from '../types/product';
+
+export const productsAPI = {
+    getProducts: async (limit: number = 10, skip: number = 0): Promise<ProductsResponse> => {
+        const response = await api.get<ProductsResponse>(`/products?limit=${limit}&skip=${skip}`);
+
+        return response.data;
+    },
+
+    searchProducts: async (query: string): Promise<ProductsResponse> => {
+        const response = await api.get<ProductsResponse>(`/products/search?q=${query}`);
+
+        return response.data;
+    },
+
+    addProduct: async (product: NewProduct): Promise<Product> => {
+        const response = await api.post<Product>('/products/add', product);
+        return response.data;
+    },
+
+    updateProduct: async (id: number, product: Partial<Product>): Promise<Product> => {
+        const response = await api.put<Product>(`/products/${id}`, product);
+        return response.data;
+    },
+
+    deleteProduct: async (id: number): Promise<Product> => {
+        const response = await api.delete<Product>(`/products/${id}`);
+        return response.data;
+    },
+};
