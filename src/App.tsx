@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/auth-provider';
-import { Login } from './pages/login';
-import { Products } from './pages/products';
+import { Login } from './pages/login/login.tsx';
+import { Products } from './pages/products/products.tsx';
 import { ProtectedRoute } from './components/protected-route';
 
 function App() {

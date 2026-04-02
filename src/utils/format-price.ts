@@ -1,0 +1,1 @@
+export const formatPrice = (price: number) => {    const [integer, decimal] = price.toFixed(2).split('.');    return {        integer: parseInt(integer).toLocaleString('ru-RU'),        decimal: decimal,    };};

@@ -8,11 +8,19 @@ import prettier from 'eslint-plugin-prettier';
 import eslintConfigPrettier from 'eslint-config-prettier';
 
 export default defineConfig([
-  globalIgnores(['dist', 'node_modules', 'build', 'coverage']),
+  globalIgnores(['dist', 'node_modules', 'build', 'coverage', '.git']),
 
   {
     files: ['**/*.{ts,tsx,js,jsx}'],
-    ignores: ['eslint.config.js', 'vite.config.ts', '*.config.js', '*.config.ts'],
+    ignores: [
+      'eslint.config.js',
+      'vite.config.ts',
+      '*.config.js',
+      '*.config.ts',
+      'tailwind.config.js',
+      'postcss.config.js',
+      'jest.config.js',
+    ],
     extends: [
       js.configs.recommended,
       ...tseslint.configs.recommended,
@@ -25,7 +33,11 @@ export default defineConfig([
     },
     languageOptions: {
       ecmaVersion: 2020,
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+        ...globals.jest,
+      },
     },
     rules: {
       'prettier/prettier': [
@@ -46,16 +58,48 @@ export default defineConfig([
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       'no-console': ['warn', { allow: ['warn', 'error'] }],
-      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
+      // Дополнительные полезные правила
+      'no-unused-expressions': 'warn',
+      'no-duplicate-imports': 'error',
+      'prefer-const': 'error',
+      'no-var': 'error',
     },
   },
 
   {
-    files: ['eslint.config.js', 'vite.config.ts', '*.config.js', '*.config.ts'],
+    files: [
+      'eslint.config.js',
+      'vite.config.ts',
+      '*.config.js',
+      '*.config.ts',
+      'tailwind.config.js',
+      'postcss.config.js',
+      'jest.config.js',
+    ],
     rules: {
       'prettier/prettier': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
       'no-console': 'off',
+      '@typescript-eslint/no-unused-vars': 'off',
+      'no-undef': 'off',
+    },
+  },
+
+  // Специальные правила для тестов
+  {
+    files: ['**/*.test.ts', '**/*.test.tsx', '**/__tests__/**/*'],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+      'no-console': 'off',
+      '@typescript-eslint/no-unused-vars': 'off',
     },
   },
 ]);
