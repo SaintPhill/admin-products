@@ -75,7 +75,7 @@ export const Products = () => {
                 <div className="bg-white">
                     <Toolbar onRefresh={handleRefresh} onAdd={openAddModal} isLoading={loading} />
 
-                    <div className="p-[30px]">
+                    <div className="p-[30px] pt-0">
                         {loading && <LoadingProgress progress={progress} />}
                         {error && <ErrorMessage message={error} onRetry={handleRefresh} />}
 
