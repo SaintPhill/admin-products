@@ -1,18 +1,45 @@
 import * as React from 'react';
 import { cn } from '../../lib/utils';
 
-const Input = React.forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>(
-    ({ className, type, ...props }, ref) => {
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+    leftIcon?: React.ReactNode;
+    rightIcon?: React.ReactNode;
+    onRightIconClick?: () => void;
+}
+
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+    ({ className, type, leftIcon, rightIcon, onRightIconClick, ...props }, ref) => {
         return (
-            <input
-                type={type}
-                className={cn(
-                    'flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:cursor-not-allowed disabled:opacity-50',
-                    className
+            <div className="relative w-full">
+                {leftIcon && (
+                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+                        {leftIcon}
+                    </div>
                 )}
-                ref={ref}
-                {...props}
-            />
+                <input
+                    type={type}
+                    className={cn(
+                        'w-full rounded-[12px] border border-[#EDEDED] bg-white text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:cursor-not-allowed disabled:opacity-50',
+                        'pt-[14px] pb-[14px]',
+                        leftIcon ? 'pl-[52px]' : 'pl-4',
+                        rightIcon ? 'pr-[52px]' : 'pr-4',
+                        className
+                    )}
+                    ref={ref}
+                    {...props}
+                />
+                {rightIcon && (
+                    <div
+                        className={cn(
+                            'absolute right-4 top-1/2 -translate-y-1/2 text-gray-400',
+                            onRightIconClick && 'cursor-pointer hover:text-gray-600'
+                        )}
+                        onClick={onRightIconClick}
+                    >
+                        {rightIcon}
+                    </div>
+                )}
+            </div>
         );
     }
 );

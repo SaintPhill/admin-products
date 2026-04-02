@@ -1,0 +1,1 @@
+import { formatPrice } from '../../../utils/format-price.ts';interface PriceFormatterProps {    price: number;}export const PriceFormatter = ({ price }: PriceFormatterProps) => {    const { integer, decimal } = formatPrice(price);    return (        <>            {integer}            <span style={{ color: '#9CA3AF' }}>, {decimal}</span>        </>    );};
