@@ -3,16 +3,25 @@ import { cn } from '../../lib/utils';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     leftIcon?: React.ReactNode;
+    leftIconClassName?: string;
     rightIcon?: React.ReactNode;
     onRightIconClick?: () => void;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-    ({ className, type, leftIcon, rightIcon, onRightIconClick, ...props }, ref) => {
+    (
+        { className, leftIconClassName, type, leftIcon, rightIcon, onRightIconClick, ...props },
+        ref
+    ) => {
         return (
             <div className="relative w-full">
                 {leftIcon && (
-                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+                    <div
+                        className={cn(
+                            'absolute left-4 top-1/2 -translate-y-1/2 text-gray-400',
+                            leftIconClassName
+                        )}
+                    >
                         {leftIcon}
                     </div>
                 )}
